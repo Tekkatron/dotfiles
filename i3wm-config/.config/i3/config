@@ -1,0 +1,518 @@
+#"~/.local/share/nvim/swap//%home%tekka%.config%i3%config.swp" This defines which key super maps to on your keyboard.  
+# Alt key is Mod1, and Windows key is Mod4
+set $mod Mod4
+
+# Auto Back and Forth Switching for Workspaces
+workspace_auto_back_and_forth yes
+
+# Main font for i3wm
+font pango:Consolas Bold 8
+
+# set default desktop layout (default is tiling)
+workspace_layout tabbed 
+
+# Force Tabbed Layout
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+
+# Default Terminal - ST (Suckless Terminal)
+set $term --no-startup-id
+
+#Increase key rate  
+exec_always --no-startup-id bash -c 'sleep 2 && xset r rate 300 50' 
+
+
+exec_always --no-startup-id sh -c 'sleep 1 && nitrogen --set-scaled --restore &' 
+
+# i3 config file (v4) for Regolith Desktop Environment
+
+# This is the Solarized color palette.
+
+set $base03    #002b36
+set $base02    #073642
+set $base01    #586e75
+set $base00    #657b83
+set $base0     #839496
+set $base1     #93a1a1
+set $base2     #eee8d5
+set $base3     #fdf6e3
+set $yellow    #b58900
+set $orange    #cb4b10
+set $red       #dc322f
+set $magenta   #d33682
+set $violet    #6c71c4
+set $blue      #268bd2
+set $cyan      #2aa198
+set $green     #859900
+set $transparent #00000000
+set $lucent    #00000088
+
+# This is the labels which describe each i3 workspace.
+set $internet	"1:    "
+set $dev   	"2:    "
+set $archivos   "3:    "
+set $consolas   "4:    "
+set $chat   	"5:    "
+set $mail   	"6:    "
+set $multimedia "7:    "
+set $documentos "8:  >>  "
+set $vms  	"11: / "
+set $soporte  	"12:    " 
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+hide_edge_borders smart
+
+# start a consolas
+bindsym $mod+Return exec st  -c consolas  -f Hack:pixelsize=14:antialias=true:autohint=true
+bindsym $mod+shift+Return exec st -c hacker  -f Hack:pixelsize=14:antialias=true:autohint=true
+bindsym $mod+m exec st -c vim -f Hack:pixelsize=14:antialias=true:autohint=true -e vim 
+bindsym $mod+shift+m exec st -f Hack:pixelsize=14:antialias=true:autohint=true -e vim
+
+# start a web browser
+#bindsym $mod+Shift+Return exec /usr/bin/sensible-browser 
+
+# kill focused window
+bindsym $mod+Delete kill
+
+# rofi app and window launchers
+#bindsym $mod+BackSpace exec rofi -show drun 
+#
+bindsym $mod+BackSpace exec i3-dmenu-desktop
+bindsym $mod+Shift+BackSpace exec dmenu_run
+#bindsym $mod+Shift+BackSpace exec rofi -show run 
+#bindsym $mod+Tab exec rofi -show window 
+
+# switch to workspace with urgent window automatically
+#for_window [urgent=latest] focus
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move windows in workspaces
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change gaps interactively
+bindsym $mod+minus gaps inner current minus 6
+bindsym $mod+plus gaps inner current plus 6
+
+# toggle tiling / floating
+bindsym $mod+Shift+o floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+t focus mode_toggle
+
+# switch to workspace
+bindsym $mod+1 workspace $internet
+bindsym $mod+2 workspace $dev
+bindsym $mod+3 workspace $archivos
+bindsym $mod+4 workspace $consolas
+bindsym $mod+5 workspace $chat
+bindsym $mod+6 workspace $mail
+bindsym $mod+7 workspace $multimedia
+bindsym $mod+8 workspace $documentos
+bindsym $mod+9 workspace $vms
+bindsym $mod+0 workspace $soporte
+# Course mode to access quickly code and multimedia workspaces when learning
+bindsym $mod+Next workspace $multimedia
+bindsym $mod+Prior workspace $dev
+
+
+# cycle between workspace Old Config
+#bindsym $mod+shift+Next workspace next
+#bindsym $mod+Shift+Prior workspace prev
+
+# next/previous workspace
+
+#bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+#navigate workspaces next / previous
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $internet
+bindsym $mod+Shift+2 move container to workspace $dev
+bindsym $mod+Shift+3 move container to workspace $archivos
+bindsym $mod+Shift+4 move container to workspace $consolas
+bindsym $mod+Shift+5 move container to workspace $chat
+bindsym $mod+Shift+6 move container to workspace $mail
+bindsym $mod+Shift+7 move container to workspace $multimedia
+bindsym $mod+Shift+8 move container to workspace $documentos
+bindsym $mod+Shift+9 move container to workspace $vms
+bindsym $mod+Shift+0 move container to workspace $soporte
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3
+#bindsym $mod+Shift+e exit
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Desea salir de i3?' -b 'Si, salir de i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec gnome-session-quit
+
+# put the system to sleep
+bindsym $mod+Shift+s exec systemctl suspend
+
+# shortcuts for common system configuration tasks
+bindsym $mod+c exec gnome-control-center
+#bindsym $mod+w exec gnome-control-center wifi
+bindsym $mod+w exec st -c nmtui -e nmtui
+#bindsym $mod+w exec cmst
+bindsym $mod+b exec gnome-control-center bluetooth
+bindsym $mod+d exec gnome-control-center display
+#bindsym $mod+d exec arandr
+bindsym $mod+n exec gnome-control-center network
+bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
+
+
+
+bindsym $mod+p exec gnome-control-center power
+bindsym $mod+s exec gnome-control-center sound
+# increase screen brightness with notification
+# decrease screen brightness with notification
+bindsym 0xffc2 exec xbacklight -inc 3 
+bindsym 0xffc3 exec xbacklight -dec 3 
+
+# shortcuts for common apps
+
+# Browsers
+bindsym  $mod+Insert exec brave --force-device-scale-factor=1 --high-dpi-support=1
+bindsym  $mod+End exec firefox-developer-edition 
+
+# Utilities
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Ctrl+Escape exec pkill --no-startup-id xkill
+#bindsym $mod+o exec wine $HOME/.utils/winbox.exe
+# bindsym $mod+Ctrl+Delete exec gnome-screenshot -i
+#bindsym $mod+l exec gnome-screensaver-command --lock
+bindsym $mod+l exec env XSECURELOCK_BLANK_TIMEOUT=1 XSECURELOCK_BLANK_DPMS_STATE=suspend xsecurelock
+bindsym $mod+Ctrl+Delete exec "maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t ¿image/png"
+
+# Nitrogen
+bindsym  $mod+apostrophe exec nitrogen
+
+# Nautilus
+bindsym  $mod+questiondown exec nautilus -w
+
+
+
+
+
+
+
+
+
+# resize window (you 				can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 6 px or 6 ppt
+        bindsym Down resize grow height 6 px or 6 ppt
+        bindsym Up resize shrink height 6 px or 6 ppt
+        bindsym Right resize grow width 6 px or 6 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Disable titlebar
+new_window pixel 1
+new_float pixel 1
+
+#Forcing Focus Wrapping Enabled
+force_focus_wrapping yes
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+new_window pixel 4
+new_float pixel 4
+
+# Gaps (i3-gaps)
+gaps inner 5
+gaps outer 0
+
+smart_gaps on
+
+# Window Border color
+client.focused          #00A8E8 #1B4965 #26f1ec #FF8C00   #FF8C00
+client.focused_inactive #000011 #BEE9E8 #000011 #BEE9E8   #5F676A
+client.unfocused        #BEE9E8 #222222 #c79cc7 #292D2E   #141422
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
+# Enable popup during fullscreen
+exec_always feh --bg-fill ~/Imágenes/wallpapers/DockerPython.jpg
+popup_during_fullscreen smart
+
+focus_follows_mouse yes
+
+# Configure the bar
+bar {
+  font pango: Consolas Bold 10
+  separator_symbol " "
+  status_command i3blocks -c ~/.i3blocks.conf
+  tray_output primary  
+  position top
+
+	bindsym button4 nop
+	bindsym button5 nop
+	strip_workspace_numbers yes
+
+    colors {
+        background #1B4965
+        statusline #FFFFFF
+        separator  #00A8E8
+
+#                         BORDER  BACKGROUND TEXT
+        focused_workspace  #ffffff #ffffff #171a1a
+        active_workspace   #77ECE4 #77ECE4 #171a1a
+        inactive_workspace #1B4965 #1B4965 #CAE9FF
+        urgent_workspace   #dc322f #dc322f #ffffff
+        binding_mode       #77ECE4 #1B4965 #C8C87D    
+        }
+}
+
+# Run other programs with i3
+
+# Composite manager
+#exec_always pkill picom; sleep 4 && picom --experimental-backends --backend glx --experimental-backends -bcCGf --fade-delta=0 --no-fading-openclose --sw-opti --vsync
+exec_always pkill picom; sleep 2 && picom --fade-delta=0 --no-fading-openclose
+
+exec_always feh --bg-fill ~/Imágenes/wallpapers/DockerPython.jpg
+
+
+
+# Lanuch the shortcut Conky window on first login
+#exec --no-startup-id /usr/bin/regolith-ftue.sh
+
+# Hide the mouse pointer if unused for a duration
+#exec --no-startup-id /usr/bin/unclutter -b
+
+# Draw the desktop background.  Randomly select from a series of photos starting with ESP_
+#exec_always --no-startup-id feh --bg-scale --random /usr/share/backgrounds/ESP_*
+
+# Refresh wallpaper when monitor configuration changes.
+#exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh.sh
+
+
+
+
+###########################################################
+# Application Workspace Assign
+###########################################################
+
+assign [class="Brave-browser"] $internet
+assign [class="Google-chrome"] $internet
+assign [class="chromium"] $internet
+assign [class="Firefox"] $internet
+assign [class="firefoxdeveloperedition"] $internet
+assign [class="Code"] $dev
+assign [class="jetbrains-pycharm"] $dev
+assign [class="Nautilus"] $archivos
+assign [class="calibre"] $documentos
+assign [class="Libreoffice calc"] $documentos
+assign [class="URxvt" instance="urxvt"] $consolas
+assign [window_role="consolas"] $consolas
+assign [class="consolas"] $consolas
+assign [class="vim"] $dev
+assign [class="Evolution"] $mail
+assign [class="discord"] $chat
+assign [class="Skype"] $chat
+assign [class="TelegramDesktop"] $chat
+assign [class="Messenger for Desktop"] $chat
+assign [class="whatsdesk"] $chat
+assign [class="Slack"] $chat
+assign [class="Mattermost"] $chat
+assign [class="whats-app-nativefier-d52542"] $chat
+assign [class="whatsapp-nativefier-d52542"] $chat
+assign [class="Atomic TweetDeck"] $chat
+assign [class="teams-for-linux"] $chat
+assign [class="Thunderbird"] $mail
+assign [class="vlc"] $multimedia
+assign [class="obs"] $multimedia
+assign [class="deepin-movie"] $multimedia
+assign [class="spotify"] $multimedia
+assign [class="Vmplayer"] $vm
+assign [class="Remmina"] $soporte
+assign [class="Anydesk"] $soporte
+assign [class="TeamViewer"] $soporte
+assign [class="TeamViewer"] $soporte
+assign [class="Gnome-system-monitor"] $vms
+assign [class="zoom"] $chat
+assign [class="zoom"] $chat
+
+
+for_window [class="SimpleScreenRecorder"] floating enable border pixel 1
+for_window [class="Gnome-calculator"] floating enable border pixel 1
+for_window [class="Gnome-calendar"] floating enable border pixel 1
+for_window [class="Caffeine"] floating enable border pixel 1
+for_window [class="nmtui"] floating enable border pixel 1 resize set  640 480;[class="nmtui"] move position center 
+for_window [class="Gnome-tweaks"] floating enable border pixel 1
+for_window [class="Gnome-control-center"] floating enable border pixel 1
+for_window [class="zoom"] floating enable border pixel 1
+for_window [class="Youtube-DLG"] floating enable border pixel 1 resize set 1280 720
+for_window [class="Pavucontrol"] floating enable border pixel 1 resize set 600 400
+for_window [class="Nitrogen"] floating enable border pixel 1 resize set 900 600;[class="Nitrogen"] move position center
+for_window [class="Arandr"] floating enable border pixel 2;[class="Arandr"] move position center
+
+#for_window [class="Gnome-flashback"] kill
+
+for_window [class="dropdown"] floating enable 
+for_window [class="dropdown"] border pixel 5 
+for_window [class="dropdown"] resize set 625 400 
+for_window [class="dropdown"] move scratchpad
+
+
+## Outputs
+set $lcd "eDP1"
+set $hdmi1 "HDMI1"
+set $hdmi2 "HDMI2"
+set $dp1 "DP1"
+set $dp2 "DP2"
+
+# Default Integrated Screen
+workspace $internet output $lcd
+workspace $dev output $lcd
+workspace $archivosoutput $lcd
+workspace $terminal output $lcd
+workspace $comms output $lcd
+
+# Default Extenal Screen
+#workspace $mail output $hdmi1
+#workspace $mail output $hdmi2
+#workspace $mail output $dp1
+workspace $mail output $dp2
+#workspace $multimedia output $hdmi1
+#workspace $multimedia output $hdmi2
+#workspace $multimedia output $dp1
+workspace $multimedia output $dp2
+#workspace $vm output $hdmi1
+#workspace $vm output $hdmi2
+#workspace $vm output $dp1
+workspace $vm output $dp2
+#workspace $soporte output $hdmi1
+#workspace $soporte output $hdmi2
+#workspace $soporte output $dp1
+workspace $soporte output $dp2
+
+#  Containers to Adjacent Screens
+bindsym $mod+g move workspace to output left
+bindsym $mod+h move workspace to output right
+
+# Send-to and Show-from Scratchpad
+
+# FortiClient
+bindsym mod4+shift+ntilde [class="Forticlientsslvpn"] move scratchpad
+bindsym $mod+ntilde [class="Forticlientsslvpn"] scratchpad show
+
+# Spotify
+for_window [class="Spotify"] floating enable
+for_window [class="Spotify"] border pixel 0
+for_window [class="Spotify"] resize set 1366 775
+for_window [class="Spotify"] move scratchpad
+bindsym $mod+y exec spotify --force-device-scale-factor=0.9
+bindsym mod4+Escape [class="Spotify"] scratchpad show; [class="Spotify"] move position center  
+
+# Sticky Notes
+for_window [class="xpad"] floating enable
+for_window [class="xpad"] border pixel 0
+bindsym mod4+u [class="xpad"] move scratchpad
+bindsym mod4+i [class="xpad"] scratchpad show
+
+
+
+# NcSpot - Spotify CLI
+#bindsym mod4+u exec st -c music -e ncspot
+#for_window [class="music"] floating enable
+#for_window [class="music"] border pixel 2
+#for_window [class="music"] resize set 640 700
+#for_window [class="music"] move scratchpad
+#bindsym mod4+Escape [class="music"] scratchpad show; [class="music"] move position center  
+
+# Pavucontrol
+bindsym mod4+bar [class="Pavucontrol"] scratchpad show; [class="Pavucontrol"] move position center  
+for_window [class="Pavucontrol"] move scratchpad
+exec --no-startup-id pavucontrol
+
+#NextCloud Client
+#exec_always --no-startup-id org.nextcloud.Nextcloud &
+
+# Nitrogen
+#exec_always --no-startup-id nitrogen --restore &
+
+# OBS
+#bindsym $mod+shift+b [class="obs"] move scratchpad
+#bindsym mod4+b [class="obs"] scratchpad show, resize set 1440 800
+
+# Slack
+bindsym $mod+shift+l [class="Slack"] move scratchpad
+bindsym $mod+Home [class="Slack"] scratchpad show, resize set 1600 900
+
+# Terminal
+exec --no-startup-id $term -c dropdown -e python
+bindsym $mod+alt+t [class="dropdown"] scratchpad show; [class="dropdown"] move position center
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+
+exec --no-startup-id xss-lock xsecurelock
+
+# Plasma Integration
+
+# Don’t treat Plasma pop-ups as full-sized windows
+for_window [class="plasmashell"] floating enable
+
+# Don’t spawn an empty window for the Plasma Desktop
+for_window [title="Desktop — Plasma"] kill, floating enable, border none
+
+# Don’t let notifications and non-interactive pop-up windows steal focus
+no_focus [class="plasmashell" window_type="notification"]
+no_focus [class="plasmashell" window_type="on_screen_display"]
+
+
+for_window [title="Escritorio"] kill
+bindsym $mod+Print exec maim -s -k --format png /dev/stdout | xclip -selection clipboard -t image/png -i
+
+
+
+#exec --no-startup-id /usr/lib/gsd-xsettings
+#exec_always --no-startup-id gnome-power-manager
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id gnome-flashback
+
+bindsym $mod+k exec --no-startup-id arandr
+
+# exec_always --no-startup-id env XSECURELOCK_BLANK_TIMEOUT=1 && env XSECURELOCK_BLANK_DPMS_STATE=suspend 
+# exec_always --no-startup-id xautolock -time 1 -locker xsecurelock
+#exec_always --no-startup-id pkill pa-applet && pa-applet
+exec_always --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 60 xsecurelock ''
+
+
+# Updater
+exec --no-startup-id pamac-tray
+
+# Battery Notifications
+exec_always --no-startup-id i3-battery-popup -n -L 27
+for_window [title="Battery Warning"] sticky enable
