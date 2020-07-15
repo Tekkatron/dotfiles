@@ -66,10 +66,10 @@ floating_modifier $mod
 hide_edge_borders smart
 
 # start a consolas
-bindsym $mod+Return exec st  -c consolas  -f Hack:pixelsize=14:antialias=true:autohint=true
-bindsym $mod+shift+Return exec st -c hacker  -f Hack:pixelsize=14:antialias=true:autohint=true
-bindsym $mod+m exec st -c vim -f Hack:pixelsize=14:antialias=true:autohint=true -e vim 
-bindsym $mod+shift+m exec st -f Hack:pixelsize=14:antialias=true:autohint=true -e vim
+bindsym $mod+Return exec terminator
+bindsym $mod+shift+Return exec terminator -c hacker
+bindsym $mod+m exec st -c nvim -f Hack:pixelsize=14:antialias=true:autohint=true -e vim 
+bindsym $mod+shift+m exec terminator -f Hack:pixelsize=14:antialias=true:autohint=true -e vim
 
 # start a web browser
 #bindsym $mod+Shift+Return exec /usr/bin/sensible-browser 
