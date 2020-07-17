@@ -6,7 +6,7 @@ set $mod Mod4
 workspace_auto_back_and_forth yes
 
 # Main font for i3wm
-font pango:Consolas Bold 8
+font pango:Consolas Bold 10
 
 # set default desktop layout (default is tiling)
 workspace_layout tabbed 
@@ -140,8 +140,8 @@ bindsym Mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
 
 #navigate workspaces next / previous
-bindsym Mod1+Ctrl+Right workspace next
-bindsym Mod1+Ctrl+Left workspace prev
+bindsym $mod+Shift+Next workspace next
+bindsym $mod+Shift+Prior workspace prev
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -328,13 +328,14 @@ assign [class="chromium"] $internet
 assign [class="Firefox"] $internet
 assign [class="firefoxdeveloperedition"] $internet
 assign [class="Code"] $dev
+assign [class="code-oss"] $dev
 assign [class="jetbrains-pycharm"] $dev
 assign [class="Nautilus"] $archivos
 assign [class="calibre"] $documentos
 assign [class="Libreoffice calc"] $documentos
 assign [class="URxvt" instance="urxvt"] $consolas
 assign [window_role="consolas"] $consolas
-assign [class="consolas"] $consolas
+assign [class="Terminator"] $consolas
 assign [class="vim"] $dev
 assign [class="Evolution"] $mail
 assign [class="discord"] $chat
